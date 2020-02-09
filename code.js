@@ -44,7 +44,7 @@ function Generar(intrucciones) {
       else if (arrInstrucciones[x] == "saltasi0") {
         maquina += "00111";
       }
-      //Registros
+      // Registros
       else if (arrInstrucciones[x] == "R0") {
         maquina += "000";
       }
@@ -80,10 +80,12 @@ function Generar(intrucciones) {
 }
 
 /**
- * 
- * @param {*} num 
+ * Converts a decimal number into binary number
+ * @param {num} num Decimal number which is going to be converted
+ * @returns {num} num converted into binary
  */
 function calcularBinario(num) {
+  // 
   let cadena = "";
   let cadenaInvertida = "";
   while (num != 0 && num != 1) {
@@ -103,37 +105,78 @@ function calcularBinario(num) {
   return cadenaInvertida;
 }
 
+/**
+ *
+ *
+ * @param {*} maquina
+ */
 function ejecutar(maquina) {
   let arrFunciones = maquina.match(/.{1,16}/g);
   let arrRegistro = [0, 0, 0, 0, 0, 0, 0, 0];
-  txtEjecucion.innerHTML = "<p>";
+  txtEjecucion.innerHTML="";
   for (let x = 0; x < arrFunciones.length; x++) {
-    console.log(arrFunciones[x]);
     let instruccion = arrFunciones[x].slice(0, 5);
     let registroBin = arrFunciones[x].slice(5, 8);
-    let registroDec = calcularDecimal(registroBin);
     let valorBin = arrFunciones[x].slice(8, 16);
-    let valorDec = calcularDecimal(valorBin);
 
     // Instrucciones
+    // imprime
     if (instruccion == "00000") {
+      let registroDec = calcularDecimal(registroBin);
       txtEjecucion.innerHTML+=arrRegistro[registroDec];
     }
+    // imprimec
     else if(instruccion == "00001"){
-      let caracter="";
-      caracter.fromCharCode();
-      txtEjecucion.innerHTML+=
+      let registroDec = calcularDecimal(registroBin);
+      let caracter=String.fromCharCode(arrRegistro[registroDec]);
+      txtEjecucion.innerHTML+=caracter;
+    }
+    // valor
+    else if(instruccion=="00010"){
+      let registroDec = calcularDecimal(registroBin);
+      let valorDec = calcularDecimal(valorBin);
+      arrRegistro[registroDec]=valorDec;
+    }
+    // borra
+    else if(instruccion=="00011"){
+      let registroDec = calcularDecimal(registroBin);
+      arrRegistro[registroDec]=0;
+    }
+    // suma
+    else if(instruccion=="00100"){
+      let registroDec = calcularDecimal(registroBin);
+      let valorDec = calcularDecimal(valorBin);
+      arrRegistro[registroDec]+=valorDec;
+    }
+    // resta
+    else if(instruccion=="00101"){
+      let registroDec = calcularDecimal(registroBin);
+      let valorDec = calcularDecimal(valorBin);
+      arrRegistro[registroDec]-=valorDec;
+      if(arrRegistro[registroDec]<0){
+        arrRegistro[registroDec]=0;
+      }
+    }
+    // salta
+    else if(instruccion=="00110"){
+      let valorDec = calcularDecimal(valorBin);
+      x=valorDec-1;
+    }
+    // saltasi0
+    else if(instruccion=="00111"){ 
+      let registroDec = calcularDecimal(registroBin);
+      if(arrRegistro[registroDec]==0){ 
+      let valorDec = calcularDecimal(valorBin);
+      x=valorDec-1;
+      }
     }
   }
-  txtEjecucion.innerHTML += "</p>";
 }
 
 function calcularDecimal(bin) {
   let decimal=0;
   let arrBin=bin.split("");
-  console.log(arrBin);
   let binReverse = arrBin.reverse().join("");
-  console.log(binReverse);
   for(let x=0;x<binReverse.length;x++){
     if((x==0)&&(binReverse.charAt(x)==1)){
     decimal+=1;
@@ -142,7 +185,6 @@ function calcularDecimal(bin) {
       decimal+=Math.pow(2,x);
     }
   }
-  console.log(decimal);
   return decimal;
 }
 
