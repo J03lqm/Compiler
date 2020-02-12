@@ -6,14 +6,17 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 <head>
 <body>
-    <h2>Intrucciones</h2>
-    <textarea id="txtIntrucciones" cols="100" rows="10"></textarea>
-    <p><input type="button" value="Generar" id="btnGenerar"></p>
-    <h2>Código máquina</h2>
-    <textarea id="txtResultado" cols="100" rows="10"></textarea>
-    <p><input type="button" value="Ejecutar" id="btnEjecutar"></p>
-    <h2>Resultado</h2>
-    <textarea id="txtEjecucion" cols="100" rows="10"></textarea>
+    <div id="divCampos">
+        <h2>Intrucciones</h2>
+        <textarea id="txtIntrucciones" cols="100" rows="10" placeholder="Escriba aquí el codigo"></textarea>
+        <p><input type="button" value="Generar" id="btnGenerar"></p>
+        <h2>Código máquina</h2>
+        <textarea id="txtResultado" cols="100" rows="3" readonly></textarea>
+        <p><input type="button" value="Ejecutar" id="btnEjecutar"></p>
+        <h2>Resultado</h2>
+        <textarea id="txtEjecucion" cols="100" rows="1" readonly></textarea>
+        <p id="autor">Joel Quenard Martínez</p>
+    </div>
 <script src="code.js"></script>
 </body>
 </html>
