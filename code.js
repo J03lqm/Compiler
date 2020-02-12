@@ -4,7 +4,7 @@
 /////////////////
 
 /**
- * Generar
+ * generar
  * Receives code as parameter and converts it into binary 
  * @param {String} intrucciones - Code that is going to be converted into binary instructions
  * @return {String} Binary code
