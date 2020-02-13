@@ -2,7 +2,6 @@ body{
     background-color: rgb(135, 153, 235);
     padding-left: 4%;
     padding-right: 4%;
-    padding-top: 2%;
     font-family: monospace;
     
 }
@@ -21,4 +20,7 @@ h2{
 #autor{
     text-align: right;
 
+}
+.readonly{
+    background-color: rgb(231, 231, 231);
 }
