@@ -11,19 +11,22 @@
  */
 function generar(intrucciones) {
   if (intrucciones != "") {
+
     // Array that contains the instructions
     let arrInstrucciones = [];
+
     // String where binary code is going to be written
     let maquina = "";
     arrInstrucciones = intrucciones.split(/ |\n/);
     for (let x = 0; x < arrInstrucciones.length; x++) {
+
       // Calculates value in binary
       if (isNaN(arrInstrucciones[x]) === false) {
         let valor = calcularBinario(arrInstrucciones[x]);
-        maquina += valor;
+        maquina  += valor;
       }
 
-      // Instructions
+      // Instructions //
       else if (arrInstrucciones[x] == "imprime") {
         maquina += "00000";
       }
@@ -48,7 +51,8 @@ function generar(intrucciones) {
       else if (arrInstrucciones[x] == "saltasi0") {
         maquina += "00111";
       }
-      // Registeries
+
+      // Registeries //
       else if (arrInstrucciones[x] == "R0") {
         maquina += "000";
       }
@@ -79,7 +83,7 @@ function generar(intrucciones) {
       }
     }
     txtResultado.innerHTML = maquina;
-  return maquina;
+    return maquina;
   }
 }
 
@@ -89,8 +93,10 @@ function generar(intrucciones) {
  * @return {num} num converted into binary
  */
 function calcularBinario(num) {
+
   // Calculated binary number (reverse)
   let cadena = "";
+
   // Final binary number
   let cadenaInvertida = "";
   while (num != 0 && num != 1) {
@@ -100,11 +106,11 @@ function calcularBinario(num) {
   if (num == 1) {
     cadena += "1";
   }
-// Ensure binary number length is 8
+  // Ensure binary number length is 8
   for (let i = cadena.length; i < 8; i++) {
-    cadena += "0";
+    cadena  += "0";
   }
-// Reverts the string
+  // Reverts the string
   for (let x = cadena.length; x >= 0; x--) {
     cadenaInvertida += cadena.charAt(x);
   }
@@ -120,85 +126,98 @@ function calcularBinario(num) {
 function ejecutar(maquina) {
   let arrFunciones = maquina.match(/.{1,16}/g);
   let arrRegistro = [0, 0, 0, 0, 0, 0, 0, 0];
-  txtEjecucion.innerHTML="";
+  txtEjecucion.innerHTML = "";
   for (let x = 0; x < arrFunciones.length; x++) {
+
     // String that contain JUST the instruction
     let instruccion = arrFunciones[x].slice(0, 5);
+
     // String that contains JUST the registry
     let registroBin = arrFunciones[x].slice(5, 8);
+
     // String that contains JUST the value
     let valorBin = arrFunciones[x].slice(8, 16);
 
-    // Instrucciones
+    // Instructions //
+
     // imprime
     if (instruccion == "00000") {
       let registroDec = calcularDecimal(registroBin);
-      txtEjecucion.innerHTML+=arrRegistro[registroDec];
+      txtEjecucion.innerHTML += arrRegistro[registroDec];
     }
+
     // imprimec
-    else if(instruccion == "00001"){
+    else if (instruccion == "00001") {
       let registroDec = calcularDecimal(registroBin);
+
       // Receives the character in Unicode
-      let caracter=String.fromCharCode(arrRegistro[registroDec]);
-      txtEjecucion.innerHTML+=caracter;
+      let caracter = String.fromCharCode(arrRegistro[registroDec]);
+      txtEjecucion.innerHTML += caracter;
     }
+
     // valor
-    else if(instruccion=="00010"){
+    else if (instruccion == "00010") {
       let registroDec = calcularDecimal(registroBin);
-      let valorDec = calcularDecimal(valorBin);
-      arrRegistro[registroDec]=valorDec;
+      let valorDec    = calcularDecimal(valorBin);
+      arrRegistro[registroDec] = valorDec;
     }
+
     // borra
-    else if(instruccion=="00011"){
+    else if (instruccion == "00011") {
       let registroDec = calcularDecimal(registroBin);
-      arrRegistro[registroDec]=0;
+      arrRegistro[registroDec] = 0;
     }
+
     // suma
-    else if(instruccion=="00100"){
+    else if (instruccion == "00100") {
       let registroDec = calcularDecimal(registroBin);
-      let valorDec = calcularDecimal(valorBin);
-      arrRegistro[registroDec]+=valorDec;
+      let valorDec    = calcularDecimal(valorBin);
+      arrRegistro[registroDec] += valorDec;
     }
+
     // resta
-    else if(instruccion=="00101"){
+    else if (instruccion == "00101") {
       let registroDec = calcularDecimal(registroBin);
-      let valorDec = calcularDecimal(valorBin);
-      arrRegistro[registroDec]-=valorDec;
-      if(arrRegistro[registroDec]<0){
-        arrRegistro[registroDec]=0;
+      let valorDec    = calcularDecimal(valorBin);
+      arrRegistro[registroDec] -= valorDec;
+      if (arrRegistro[registroDec] < 0) {
+        arrRegistro[registroDec] = 0;
       }
     }
+
     // salta
-    else if(instruccion=="00110"){
+    else if (instruccion == "00110") {
       let valorDec = calcularDecimal(valorBin);
-      x=valorDec-1;
+      x = valorDec - 1;
     }
+
     // saltasi0
-    else if(instruccion=="00111"){ 
+    else if (instruccion == "00111") {
       let registroDec = calcularDecimal(registroBin);
-      if(arrRegistro[registroDec]==0){ 
-      let valorDec = calcularDecimal(valorBin);
-      x=valorDec-1;
+      if (arrRegistro[registroDec] == 0) {
+        let valorDec  = calcularDecimal(valorBin);
+        x = valorDec  - 1;
       }
     }
   }
 }
+
 /**
  * Converts a binary number into decimal
  * @param {String} bin - Binary number which is going to be converted
  * @returns {number} bin in decimal
  */
 function calcularDecimal(bin) {
-  let decimal=0;
+  let decimal = 0;
   // Array that contains every digit in bin
-  let arrBin=bin.split("");
+  let arrBin = bin.split("");
   let binReverse = arrBin.reverse().join("");
-  for(let x=0;x<binReverse.length;x++){
-    if((x==0)&&(binReverse.charAt(x)==1)){
-    decimal+=1;
+  for (let x = 0; x < binReverse.length; x++) {
+    if ((x == 0) && (binReverse.charAt(x) == 1)) {
+      decimal += 1;
     }
-    else if(binReverse.charAt(x)==1){
-      decimal+=Math.pow(2,x);
+    else if (binReverse.charAt(x) == 1) {
+      decimal += Math.pow(2, x);
     }
   }
   return decimal;
@@ -209,7 +228,7 @@ function calcularDecimal(bin) {
 /////////////////
 
 let txtIntrucciones = document.querySelector("#txtIntrucciones");
-let txtResultado = document.querySelector("#txtResultado");
-let txtEjecucion = document.querySelector("#txtEjecucion");
+let txtResultado    = document.querySelector("#txtResultado");
+let txtEjecucion    = document.querySelector("#txtEjecucion");
 document.querySelector("#btnGenerar").addEventListener("click", function () { generar(txtIntrucciones.value) });
 document.querySelector("#btnEjecutar").addEventListener("click", function () { ejecutar(txtResultado.value) });
