@@ -22,7 +22,7 @@ The compiler receives a code¹ that will be translated into binary instrucions w
 <br><b>Example</b>
 
 > R2 == 72 <br>
-> imprimec R2 → 00001010 00000000 → h</dd>
+> imprimec R2 → 00001010 00000000 → H</dd>
 
 <dt><b>valor RZ VALUE</b></dt>
 <dd>Sets the RZ value to VALUE
