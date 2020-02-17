@@ -21,4 +21,5 @@ h2{
 }
 .readonly{
     background-color: rgb(231, 231, 231);
+    color: rgb(44, 44, 44);
 }

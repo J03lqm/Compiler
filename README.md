@@ -1,6 +1,6 @@
 # Compiler
 Joel Quenard Martínez<br>
-Compiler proyect made as final practice in the subject HLC 2ºSMR<br>14/02/2020<br>
+Compiler proyect made as final practice in the subject HLC. 2ºSMR<br>14/02/2020<br>
 <a href="https://github.com/J03lqm/Compiler">Github proyect</a>
 ## How it works
 The compiler receives a code¹ that will be translated into binary instrucions which will be executed. It uses 2Bytes instructions, where the first 5 bits will be used fort he instruction, the next 3 bits for the registry and the last byte for its value. If the instruction line is 255 or greater the execution will exit.

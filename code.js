@@ -4,7 +4,6 @@
 /////////////////
 
 /**
- * Generar
  * Receives code as parameter and converts it into binary 
  * @param {String} intrucciones - Code that is going to be converted into binary instructions
  * @return {String} Binary code
@@ -138,10 +137,14 @@ function ejecutar(maquina) {
     // String that contains JUST the value
     let valorBin = arrFunciones[x].slice(8, 16);
 
-    // Instructions //
+    // Exits if the instruction line is 255 or greater
+    if ( x >= 255){
+      return;
+    }
 
+    // Instructions //
     // imprime
-    if (instruccion == "00000") {
+    else if (instruccion == "00000") {
       let registroDec = calcularDecimal(registroBin);
       txtEjecucion.innerHTML += arrRegistro[registroDec];
     }
