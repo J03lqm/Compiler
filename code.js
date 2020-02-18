@@ -4,7 +4,7 @@
 /////////////////
 
 /**
- * Receives code as parameter and converts it into binary 
+ * Receives code as parameter and converts it into binary
  * @param {String} intrucciones - Code that is going to be converted into binary instructions
  * @return {String} Binary code
  */
@@ -13,6 +13,9 @@ function generar(intrucciones) {
 
     // Array that contains the instructions
     let arrInstrucciones = [];
+
+    //Turn the code into lowercase so it's not case sensitive
+    intrucciones = intrucciones.toLowerCase();
 
     // String where binary code is going to be written
     let maquina = "";
@@ -52,32 +55,32 @@ function generar(intrucciones) {
       }
 
       // Registeries //
-      else if (arrInstrucciones[x] == "R0") {
+      else if (arrInstrucciones[x] == "r0") {
         maquina += "000";
       }
-      else if (arrInstrucciones[x] == "R1") {
+      else if (arrInstrucciones[x] == "r1") {
         maquina += "001";
       }
-      else if (arrInstrucciones[x] == "R2") {
+      else if (arrInstrucciones[x] == "r2") {
         maquina += "010";
       }
-      else if (arrInstrucciones[x] == "R3") {
+      else if (arrInstrucciones[x] == "r3") {
         maquina += "011";
       }
-      else if (arrInstrucciones[x] == "R4") {
+      else if (arrInstrucciones[x] == "r4") {
         maquina += "100";
       }
-      else if (arrInstrucciones[x] == "R5") {
+      else if (arrInstrucciones[x] == "r5") {
         maquina += "101";
       }
-      else if (arrInstrucciones[x] == "R6") {
+      else if (arrInstrucciones[x] == "r6") {
         maquina += "110";
       }
-      else if (arrInstrucciones[x] == "R7") {
+      else if (arrInstrucciones[x] == "r7") {
         maquina += "111";
       }
       // Write "00000000" as value in instructions that doesnt request it
-      if ((arrInstrucciones[x] == "R0" || arrInstrucciones[x] == "R1" || arrInstrucciones[x] == "R2" || arrInstrucciones[x] == "R3" || arrInstrucciones[x] == "R4" || arrInstrucciones[x] == "R5" || arrInstrucciones[x] == "R6" || arrInstrucciones[x] == "R7") && isNaN(arrInstrucciones[x + 1]) === true) {
+      if ((arrInstrucciones[x] == "r0" || arrInstrucciones[x] == "r1" || arrInstrucciones[x] == "r2" || arrInstrucciones[x] == "r3" || arrInstrucciones[x] == "r4" || arrInstrucciones[x] == "r5" || arrInstrucciones[x] == "r6" || arrInstrucciones[x] == "r7") && isNaN(arrInstrucciones[x + 1]) === true) {
         maquina += "00000000";
       }
     }
